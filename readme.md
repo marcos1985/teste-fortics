@@ -5,7 +5,16 @@
 
 - Composer:
     composer install
+
+- Criar arquivo .env com dados de acesso ao banco
+
 - Migrações:
     php artisan migrate
 
-A documentção se encontra na view welcome.blade.php.
+- Gerar chave:
+    php artisan key:generate
+
+- executar via php:
+    php artisan serve --port porta
+
+A documentação se encontra na view welcome.blade.php.

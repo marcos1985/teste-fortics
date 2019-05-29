@@ -9,6 +9,33 @@
         <hr>
 
         <h5># Download e setup (sem docker)</h5>
+        <br>
+
+        <p>
+            <strong>Clonar o projeto:</strong>
+                git clone https://github.com/marcos1985/teste-fortics.git
+        </p>
+
+        <p>
+            <strong>Composer:</strong>
+                composer install
+        </p>
+        
+        <p>
+            <strong> Migrações: </strong>
+                php artisan migrate
+        </p>
+
+        <p>
+            <strong> Gerar chave: </strong>
+                php artisan key:generate
+        </p>
+
+        <p>
+            <strong> Executar via php: </strong>
+                php artisan serve --port porta
+        </p>
+
         <p>O projeto foi criado com o Laravel 5.8 por meio do composer, para rodar é necessário ter todos os requisitos pedidos pelo Laravel 5.8.</p>
         <p>Ao realizar o download deve-se baixar as dependencias com o comando: composer install, na pasta do projeto.</p>
         <p>Será necessário também criar o arquivo .env para se fazer a configuração do acesso ao bando de dados.</p>
