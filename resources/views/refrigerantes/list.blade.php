@@ -35,7 +35,7 @@
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="">Sabor</label>
-                            <input type="text" class="form-control" name="sabor" value="">
+                            <input type="text" class="form-control" name="sabor" value="{{$sabor}}">
 
                         </div>
                     </div>
@@ -46,7 +46,7 @@
                             <select class="form-control" name="id_tipo_refrigerante">
                                 <option value="">Selecione ...</option>
                                 @foreach($tipos as $tipo)
-                                <option value="{{$tipo->id}}">{{$tipo->tipo}}</option>
+                                <option value="{{$tipo->id}}" @if( $id_tipo_refrigerante == $tipo->id) selected="selected" @endif >{{$tipo->tipo}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -58,9 +58,26 @@
                             <select class="form-control" name="id_litragem">
                                 <option value="">Selecione ...</option>
                                 @foreach($litragens as $litragem)
-                                <option value="{{$litragem->id}}">{{$litragem->nome}}</option>
+                                <option value="{{$litragem->id}}" @if( $id_litragem == $litragem->id) selected="selected" @endif>{{$litragem->nome}}</option>
                                 @endforeach
                             </select>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label for="">Quantidade</label>
+                            <input type="text" class="form-control" name="qtd_estoque" value="{{$qtd_estoque}}" style="text-align:right;">
+                        </div>
+                    </div>
+
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label for="">Valor R$</label>
+                            <input type="text" class="form-control" name="valor_unidade" value="{{$valor_unidade}}" style="text-align:right;">
                         </div>
                     </div>
 

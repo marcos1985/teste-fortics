@@ -2,7 +2,7 @@
 
 @section('conteudo')
 <div class="header">
-    <h4>Adicionar referigerante</h4>
+    <h4>Atualizar referigerante</h4>
     <hr>
 </div>
 
@@ -24,21 +24,21 @@
     </div>
 
     <div class="card-body">
-        <form class="" action="{{url('/refrigerantes/adicionar')}}" method="post">
+        <form class="" action="{{url('/refrigerantes/atualizar')}}" method="post">
             {{ csrf_field() }}
-
+            <input type="hidden" name="id" value="{{$refrigerante->id}}">
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="">* Nome</label>
-                        <input type="text" class="form-control" name="nome" value="{{old('nome')}}">
+                        <input type="text" class="form-control" name="nome" value="{{$refrigerante->nome}}">
                     </div>
                 </div>
 
                 <div class="col-md-2">
                     <div class="form-group">
                         <label for="">* Sabor</label>
-                        <input type="text" class="form-control" name="sabor" value="{{old('sabor')}}">
+                        <input type="text" class="form-control" name="sabor" value="{{$refrigerante->sabor}}">
                     </div>
                 </div>
 
@@ -48,7 +48,7 @@
                         <select class="form-control"  name="id_tipo_refrigerante">
                             <option value="">Selecione ...</option>
                             @foreach($tipos as $tipo)
-                            <option value="{{$tipo->id}}"  @if( old('id_tipo_refrigerante') == $tipo->id ) selected="selected" @endif > {{$tipo->tipo}}</option>
+                            <option value="{{$tipo->id}}"  @if( $refrigerante->tipo()->first() && $refrigerante->tipo()->first()->id == $tipo->id ) selected="selected" @endif > {{$tipo->tipo}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -60,7 +60,7 @@
                         <select class="form-control" name="id_litragem">
                             <option value="">Selecione ...</option>
                             @foreach($litragens as $litragem)
-                            <option value="{{$litragem->id}}" @if( old('id_litragem') == $litragem->id ) selected="selected" @endif >{{$litragem->nome}}</option>
+                            <option value="{{$litragem->id}}" @if( $refrigerante->litragem()->first() && $refrigerante->litragem()->first()->id == $litragem->id ) selected="selected" @endif >{{$litragem->nome}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -73,14 +73,14 @@
                 <div class="col-md-1">
                     <div class="form-group">
                         <label for="">* Quantidade</label>
-                        <input type="text" class="form-control" name="qtd_estoque" value="{{old('qtd_estoque')}}" style="text-align:right;" >
+                        <input type="text" class="form-control" name="qtd_estoque" value="{{$refrigerante->qtd_estoque}}" style="text-align:right;" >
                     </div>
                 </div>
 
                 <div class="col-md-1">
                     <div class="form-group">
                         <label for="">* Valor (R$)</label>
-                        <input type="text" class="form-control money" name="valor_unidade" value="{{old('valor_unidade')}}" style="text-align:right;">
+                        <input type="text" class="form-control money" name="valor_unidade" value="{{$refrigerante->valor_unidade}}" style="text-align:right;">
                     </div>
                 </div>
 
