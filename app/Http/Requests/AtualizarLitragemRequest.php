@@ -24,7 +24,7 @@ class AtualizarLitragemRequest extends FormRequest
     public function rules()
     {
         return [
-            "nome" => "required|unique:tb_litragem_refrigerante,id," . $this->input('id')
+            "nome" => "required|unique:tb_litragem_refrigerante,nome," . $this->input('id')
         ];
     }
 

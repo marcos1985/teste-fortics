@@ -24,14 +24,14 @@ class AtualizarTipoRequest extends FormRequest
     public function rules()
     {
         return [
-            "tipo" => "required|unique:tb_tipo_refrigerante,id," . $this->input('id')
+            "tipo" => "required|unique:tb_tipo_refrigerante,tipo," . $this->input('id')
         ];
     }
 
     public function messages() {
         return [
             "tipo.required" => "O campo tipo é obrigatório!",
-            "tipo.unique" => "O nome do tipo informada já existe!"
+            "tipo.unique" => "O nome do tipo informado já existe!"
         ];
     }
 }
