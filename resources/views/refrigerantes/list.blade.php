@@ -151,12 +151,12 @@
                                     <td>R$ {{number_format($refrigerante->valor_unidade,2,',', '.')}}</td>
                                     <td>
                                         @if (!empty($refrigerante->created_at))
-                                            {{date('d/m/Y', strtotime($refrigerante->created_at))}}
+                                            {{date('d/m/Y H:i', strtotime($refrigerante->created_at))}}
                                         @endif
                                     </td>
                                     <td>
                                         @if (!empty($refrigerante->updated_at))
-                                            {{date('d/m/Y', strtotime($refrigerante->updated_at))}}
+                                            {{date('d/m/Y H:i', strtotime($refrigerante->updated_at))}}
                                         @endif
                                     </td>
                                     <td> <a href="{{url('/refrigerantes/' . $refrigerante->id . '/editar/')}}">Editar</a> </td>

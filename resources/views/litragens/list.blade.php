@@ -92,12 +92,12 @@
                                     <td>{{$litragem->descricao}}</td>
                                     <td>
                                         @if (!empty($litragem->created_at))
-                                            {{date('d/m/Y', strtotime($litragem->created_at))}}
+                                            {{date('d/m/Y H:i', strtotime($litragem->created_at))}}
                                         @endif
                                     </td>
                                     <td>
                                         @if (!empty($litragem->updated_at))
-                                            {{date('d/m/Y', strtotime($litragem->updated_at))}}
+                                            {{date('d/m/Y H:i', strtotime($litragem->updated_at))}}
                                         @endif
                                     </td>
                                     <td> <a href="{{url('/litragens/' . $litragem->id . '/editar/')}}">Editar</a> </td>

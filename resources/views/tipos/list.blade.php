@@ -27,7 +27,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="">Tipo</label>
+                            <label for="">Nome</label>
                             <input type="text" class="form-control" name="tipo" value="{{$tipo}}">
                         </div>
                     </div>
@@ -92,12 +92,12 @@
                                     <td>{{$tipo->descricao}}</td>
                                     <td>
                                         @if (!empty($tipo->created_at))
-                                            {{date('d/m/Y', strtotime($tipo->created_at))}}
+                                            {{date('d/m/Y H:i', strtotime($tipo->created_at))}}
                                         @endif
                                     </td>
                                     <td>
                                         @if (!empty($tipo->updated_at))
-                                            {{date('d/m/Y', strtotime($tipo->updated_at))}}
+                                            {{date('d/m/Y H:i', strtotime($tipo->updated_at))}}
                                         @endif
                                     </td>
                                     <td> <a href="{{url('/tipos-refrigerantes/' . $tipo->id . '/editar/')}}">Editar</a> </td>
