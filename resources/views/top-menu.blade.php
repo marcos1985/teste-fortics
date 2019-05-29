@@ -1,10 +1,10 @@
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+<nav class="navbar navbar-expand-sm navbar-dark bg-primary fixed-top">
   <a class="navbar-brand" href="{{url('/')}}">Refris</a>
   <ul class="navbar-nav">
     <li class="nav-item">
       <a class="nav-link" href="{{url('/refrigerantes')}}">Refrigerantes</a>
     </li>
-    
+
     <li class="nav-item">
       <a class="nav-link" href="{{url('tipos-refrigerantes')}}">Tipo Refrigerante</a>
     </li>
