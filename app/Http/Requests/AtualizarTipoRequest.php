@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AtualizarMarcaRequest extends FormRequest
+class AtualizarTipoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,14 +24,14 @@ class AtualizarMarcaRequest extends FormRequest
     public function rules()
     {
         return [
-            "nome" => "required|unique:tb_marca_refrigerante,id," . $this->input('id')
+            "tipo" => "required|unique:tb_tipo_refrigerante,id," . $this->input('id')
         ];
     }
 
     public function messages() {
         return [
-            "nome.required" => "O campo nome é obrigatório!",
-            "nome.unique" => "O nome da marca informada já existe!"
+            "tipo.required" => "O campo tipo é obrigatório!",
+            "tipo.unique" => "O nome do tipo informada já existe!"
         ];
     }
 }

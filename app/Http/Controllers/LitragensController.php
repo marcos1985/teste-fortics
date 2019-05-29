@@ -7,11 +7,11 @@ use Illuminate\Support\Facades\DB;
 use Validator;
 use Session;
 
-use App\Models\Marca;
-use App\Http\Requests\AdicionarMarcaRequest;
-use App\Http\Requests\AtualizarMarcaRequest;
+use App\Models\Litragem;
+use App\Http\Requests\AdicionarLitragemRequest;
+use App\Http\Requests\AtualizarLitragemRequest;
 
-class MarcasController extends Controller
+class LitragensController extends Controller
 {
     public function index(Request $request) {
 
@@ -20,7 +20,7 @@ class MarcasController extends Controller
 
         $dados = $request->all();
 
-        $query = Marca::query();
+        $query = Litragem::query();
 
         $viewData['nome'] = "";
 
@@ -30,60 +30,60 @@ class MarcasController extends Controller
             $queryPagination['nome'] = $dados['nome'];
         }
 
-        $marcas = $query->paginate(5);
+        $litragens = $query->paginate(5);
 
-        $viewData['marcas'] = $marcas;
+        $viewData['litragens'] = $litragens;
         $viewData['queryPagination'] = $queryPagination;
 
-        return view('marcas.list', $viewData);
+        return view('litragens.list', $viewData);
     }
 
     public function create(Request $request) {
 
-        return view('marcas.create');
+        return view('litragens.create');
 
     }
 
-    public function strore(AdicionarMarcaRequest $request) {
+    public function strore(AdicionarLitragemRequest $request) {
 
         $dados = $request->all();
 
-        $marca = new Marca();
-        $marca->nome = $dados['nome'];
+        $litragem = new Litragem();
+        $litragem->nome = $dados['nome'];
 
         if (!empty($dados['descricao'])) {
-            $marca->descricao = $dados['descricao'];
+            $litragem->descricao = $dados['descricao'];
         }
 
-        if ($marca->save()){
-            Session::flash("mensagem", "Marca adicionada com sucesso!");
-            return redirect("marcas");
+        if ($litragem->save()){
+            Session::flash("mensagem", "Litragem adicionada com sucesso!");
+            return redirect("litragens");
         }
     }
 
     public function edit($id, Request $request) {
 
-        $marca = Marca::find($id);
+        $litragem = Litragem::find($id);
 
         $viewData = [];
-        $viewData['marca'] = $marca;
+        $viewData['litragem'] = $litragem;
 
-        return view('marcas.edit', $viewData);
+        return view('litragens.edit', $viewData);
 
     }
 
-    public function update(AtualizarMarcaRequest $request) {
+    public function update(AtualizarLitragemRequest $request) {
 
         $dados = $request->all();
 
-        $marca = Marca::find($dados['id']);
+        $litragem = Litragem::find($dados['id']);
 
-        $marca->nome = $dados['nome'];
-        $marca->descricao = $dados['descricao'];
+        $litragem->nome = $dados['nome'];
+        $litragem->descricao = $dados['descricao'];
 
-        if ($marca->save()) {
-            Session::flash("mensagem", "Marca atualizada com sucesso!");
-            return redirect("marcas");
+        if ($litragem->save()) {
+            Session::flash("mensagem", "Litragem atualizada com sucesso!");
+            return redirect("litragens");
         }
 
     }
@@ -101,8 +101,8 @@ class MarcasController extends Controller
         try {
 
             foreach( $dados['seleciondados'] as $selecionado ) {
-                $marca = Marca::find($selecionado);
-                $marca->delete();
+                $litragem = Litragem::find($selecionado);
+                $litragem->delete();
             }
 
             DB::commit();

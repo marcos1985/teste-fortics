@@ -2,7 +2,7 @@
 
 @section('conteudo')
 <div class="header">
-    <h4>Adicionar marca</h4>
+    <h4>Adicionar tipo de refrigerante</h4>
     <hr>
 </div>
 
@@ -20,19 +20,19 @@
 
 <div class="card">
     <div class="card-header">
-        Marca
+        Tipo
     </div>
 
     <div class="card-body">
-        <form class="" action="{{url('/marcas/adicionar')}}" method="post">
+        <form class="" action="{{url('/tipos-refrigerantes/adicionar')}}" method="post">
             {{ csrf_field() }}
 
             <div class="row">
 
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for=""><strong>* Nome<strong></label>
-                        <input type="text" class="form-control" name="nome" value="{{old('nome')}}" >
+                        <label for=""><strong>* Tipo<strong></label>
+                        <input type="text" class="form-control" name="tipo" value="{{old('tipo')}}" >
                     </div>
                 </div>
 
@@ -58,8 +58,5 @@
     </div>
 
 </div>
-
-
-
 
 @endsection

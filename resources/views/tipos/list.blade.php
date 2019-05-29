@@ -5,7 +5,7 @@
     {{csrf_field()}}
 
     <div class="header">
-        <h4>Marcas</h4>
+        <h4>Tipos de refrigerantes</h4>
         <hr>
     </div>
 
@@ -27,8 +27,8 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="">Nome</label>
-                            <input type="text" class="form-control" name="nome" value="{{$nome}}">
+                            <label for="">Tipo</label>
+                            <input type="text" class="form-control" name="tipo" value="{{$tipo}}">
                         </div>
                     </div>
                 </div>
@@ -47,20 +47,20 @@
 
     <div class="vspace" ></div>
 
-    <div class="card" id="card-marcas">
+    <div class="card" id="card-tipos">
         <div class="card-header">
-            Marcas
+            Tipos de refrigerantes
         </div>
 
         <div class="card-body">
 
             <div class="row">
                 <div class="col-md-4" >
-                    <a href="{{url('/marcas/novo')}}"class="btn btn-primary">Novo</a>
+                    <a href="{{url('/tipos-refrigerantes/novo')}}"class="btn btn-primary">Novo</a>
                 </div>
 
                 <div class="col-md-4" >
-                    <button type="button"  id="btn-excluir-marca" class="btn btn-danger" name="">Excluir</button>
+                    <button type="button"  id="btn-excluir-tipo" class="btn btn-danger" name="">Excluir</button>
                 </div>
 
             </div>
@@ -73,7 +73,7 @@
                     <table class="table table-striped" >
                         <thead>
                             <tr>
-                                <th> <input type="checkbox" id="ch-tudo-marca" name="" value=""> </th>
+                                <th> <input type="checkbox" id="ch-tudo-tipo" name="" value=""> </th>
                                 <th>#ID</th>
                                 <th>Nome</th>
                                 <th>Descrição</th>
@@ -84,30 +84,30 @@
                         </thead>
 
                         <tbody>
-                            @foreach($marcas as $marca)
+                            @foreach($tipos as $tipo)
                                 <tr>
-                                    <td> <input type="checkbox" class="ch-marca" name="" value="{{$marca->id}}"> </td>
-                                    <td>{{$marca->id}}</td>
-                                    <td>{{$marca->nome}}</td>
-                                    <td>{{$marca->descricao}}</td>
+                                    <td> <input type="checkbox" class="ch-tipo" name="" value="{{$tipo->id}}"> </td>
+                                    <td>{{$tipo->id}}</td>
+                                    <td>{{$tipo->tipo}}</td>
+                                    <td>{{$tipo->descricao}}</td>
                                     <td>
-                                        @if (!empty($marca->created_at))
-                                            {{date('d/m/Y', strtotime($marca->created_at))}}
+                                        @if (!empty($tipo->created_at))
+                                            {{date('d/m/Y', strtotime($tipo->created_at))}}
                                         @endif
                                     </td>
                                     <td>
-                                        @if (!empty($marca->updated_at))
-                                            {{date('d/m/Y', strtotime($marca->updated_at))}}
+                                        @if (!empty($tipo->updated_at))
+                                            {{date('d/m/Y', strtotime($tipo->updated_at))}}
                                         @endif
                                     </td>
-                                    <td> <a href="{{url('/marcas/' . $marca->id . '/editar/')}}">Editar</a> </td>
+                                    <td> <a href="{{url('/tipos-refrigerantes/' . $tipo->id . '/editar/')}}">Editar</a> </td>
                                 </tr>
                             @endforeach
                         </tbody>
 
                     </table>
 
-                    {{$marcas->appends($queryPagination)->links()}}
+                    {{$tipos->appends($queryPagination)->links()}}
 
                 </div>
 
@@ -123,28 +123,28 @@
 
 <script>
     $(function(){
-        MarcaController.init();
+        TiposRefrigerantesController.init();
     });
 
 
-    var MarcaController = {
+    var TiposRefrigerantesController = {
         init: function() {
 
             var self = this;
 
-            $("#ch-tudo-marca").on('click', function(){
+            $("#ch-tudo-tipo").on('click', function(){
                 self.selecionarTudo();
             });
 
-            $("#btn-excluir-marca").on('click', function(){
+            $("#btn-excluir-tipo").on('click', function(){
                 self.excluirSelecionados();
             });
 
         },
 
         selecionarTudo: function() {
-            var selecionado = $("#ch-tudo-marca").prop('checked');
-            $(".ch-marca").prop('checked', selecionado);
+            var selecionado = $("#ch-tudo-tipo").prop('checked');
+            $(".ch-tipo").prop('checked', selecionado);
         },
 
         excluirSelecionados: function() {
@@ -168,7 +168,7 @@
             .then( function (willDelete) {
               if (willDelete) {
 
-                  $('#card-marcas').loading({
+                  $('#card-tipos').loading({
                       theme: 'dark',
                       message: 'Realizando exclusão, aguarde ...'
                   });
@@ -182,7 +182,7 @@
 
         auxPsegarSelecionados: function() {
             var ids = [];
-            var selecionados = $(".ch-marca:checked");
+            var selecionados = $(".ch-tipo:checked");
 
             selecionados.each(function(index,item){
                 ids.push($(item).val());
@@ -194,7 +194,7 @@
         auxAjaxExcluirMarcas: function (selecionados) {
 
             var ajaxExclusao = $.ajax({
-                url: "{{url('/marcas/ajax/excluir')}}",
+                url: "{{url('/tipos-refrigerantes/ajax/excluir')}}",
                 type: 'post',
                 dataType: 'json',
                 data: {
@@ -204,7 +204,7 @@
             });
 
             ajaxExclusao.done(function(resultado){
-                $('#card-marcas').loading('stop');
+                $('#card-tipos').loading('stop');
 
                 if (resultado.status) {
                     swal('', "Exclusão realizada com sucesso!", 'success').then(function () {
@@ -219,7 +219,7 @@
             });
 
             ajaxExclusao.fail(function(){
-                $('#card-marcas').loading('stop');
+                $('#card-tipos').loading('stop');
                 swal("Erro", "Erro ao realizar exclusão!", "error");
 
             });

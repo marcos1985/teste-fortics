@@ -24,6 +24,7 @@
     </div>
 
     <script src="{{asset('jquery/jquery.min.js')}}" charset="utf-8"></script>
+    <script src="{{asset('jquery/jquery.mask.min.js')}}" charset="utf-8"></script>
     <script src="{{asset('bs4/js/bootstrap.min.js')}}" charset="utf-8"></script>
     <script src="{{asset('sweet-alert/sweet-alert.min.js')}}" charset="utf-8"></script>
     <script src="{{asset('jql/jquery.loading.min.js')}}" charset="utf-8"></script>

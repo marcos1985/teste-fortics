@@ -5,7 +5,7 @@
     {{csrf_field()}}
 
     <div class="header">
-        <h4>Marcas</h4>
+        <h4>Litragens</h4>
         <hr>
     </div>
 
@@ -47,20 +47,20 @@
 
     <div class="vspace" ></div>
 
-    <div class="card" id="card-marcas">
+    <div class="card" id="card-litragem">
         <div class="card-header">
-            Marcas
+            Litragens
         </div>
 
         <div class="card-body">
 
             <div class="row">
                 <div class="col-md-4" >
-                    <a href="{{url('/marcas/novo')}}"class="btn btn-primary">Novo</a>
+                    <a href="{{url('/litragens/novo')}}"class="btn btn-primary">Novo</a>
                 </div>
 
                 <div class="col-md-4" >
-                    <button type="button"  id="btn-excluir-marca" class="btn btn-danger" name="">Excluir</button>
+                    <button type="button"  id="btn-excluir-litragem" class="btn btn-danger" name="">Excluir</button>
                 </div>
 
             </div>
@@ -73,7 +73,7 @@
                     <table class="table table-striped" >
                         <thead>
                             <tr>
-                                <th> <input type="checkbox" id="ch-tudo-marca" name="" value=""> </th>
+                                <th> <input type="checkbox" id="ch-tudo-litragem" name="" value=""> </th>
                                 <th>#ID</th>
                                 <th>Nome</th>
                                 <th>Descrição</th>
@@ -84,30 +84,30 @@
                         </thead>
 
                         <tbody>
-                            @foreach($marcas as $marca)
+                            @foreach($litragens as $litragem)
                                 <tr>
-                                    <td> <input type="checkbox" class="ch-marca" name="" value="{{$marca->id}}"> </td>
-                                    <td>{{$marca->id}}</td>
-                                    <td>{{$marca->nome}}</td>
-                                    <td>{{$marca->descricao}}</td>
+                                    <td> <input type="checkbox" class="ch-litragem" name="" value="{{$litragem->id}}"> </td>
+                                    <td>{{$litragem->id}}</td>
+                                    <td>{{$litragem->nome}}</td>
+                                    <td>{{$litragem->descricao}}</td>
                                     <td>
-                                        @if (!empty($marca->created_at))
-                                            {{date('d/m/Y', strtotime($marca->created_at))}}
+                                        @if (!empty($litragem->created_at))
+                                            {{date('d/m/Y', strtotime($litragem->created_at))}}
                                         @endif
                                     </td>
                                     <td>
-                                        @if (!empty($marca->updated_at))
-                                            {{date('d/m/Y', strtotime($marca->updated_at))}}
+                                        @if (!empty($litragem->updated_at))
+                                            {{date('d/m/Y', strtotime($litragem->updated_at))}}
                                         @endif
                                     </td>
-                                    <td> <a href="{{url('/marcas/' . $marca->id . '/editar/')}}">Editar</a> </td>
+                                    <td> <a href="{{url('/litragens/' . $litragem->id . '/editar/')}}">Editar</a> </td>
                                 </tr>
                             @endforeach
                         </tbody>
 
                     </table>
 
-                    {{$marcas->appends($queryPagination)->links()}}
+                    {{$litragens->appends($queryPagination)->links()}}
 
                 </div>
 
@@ -123,28 +123,28 @@
 
 <script>
     $(function(){
-        MarcaController.init();
+        LitragemController.init();
     });
 
 
-    var MarcaController = {
+    var LitragemController = {
         init: function() {
 
             var self = this;
 
-            $("#ch-tudo-marca").on('click', function(){
+            $("#ch-tudo-litragem").on('click', function(){
                 self.selecionarTudo();
             });
 
-            $("#btn-excluir-marca").on('click', function(){
+            $("#btn-excluir-litragem").on('click', function(){
                 self.excluirSelecionados();
             });
 
         },
 
         selecionarTudo: function() {
-            var selecionado = $("#ch-tudo-marca").prop('checked');
-            $(".ch-marca").prop('checked', selecionado);
+            var selecionado = $("#ch-tudo-litragem").prop('checked');
+            $(".ch-litragem").prop('checked', selecionado);
         },
 
         excluirSelecionados: function() {
@@ -168,7 +168,7 @@
             .then( function (willDelete) {
               if (willDelete) {
 
-                  $('#card-marcas').loading({
+                  $('#card-litragem').loading({
                       theme: 'dark',
                       message: 'Realizando exclusão, aguarde ...'
                   });
@@ -182,7 +182,7 @@
 
         auxPsegarSelecionados: function() {
             var ids = [];
-            var selecionados = $(".ch-marca:checked");
+            var selecionados = $(".ch-litragem:checked");
 
             selecionados.each(function(index,item){
                 ids.push($(item).val());
@@ -194,7 +194,7 @@
         auxAjaxExcluirMarcas: function (selecionados) {
 
             var ajaxExclusao = $.ajax({
-                url: "{{url('/marcas/ajax/excluir')}}",
+                url: "{{url('/litragens/ajax/excluir')}}",
                 type: 'post',
                 dataType: 'json',
                 data: {
@@ -204,7 +204,7 @@
             });
 
             ajaxExclusao.done(function(resultado){
-                $('#card-marcas').loading('stop');
+                $('#card-litragem').loading('stop');
 
                 if (resultado.status) {
                     swal('', "Exclusão realizada com sucesso!", 'success').then(function () {
@@ -219,7 +219,7 @@
             });
 
             ajaxExclusao.fail(function(){
-                $('#card-marcas').loading('stop');
+                $('#card-litragem').loading('stop');
                 swal("Erro", "Erro ao realizar exclusão!", "error");
 
             });

@@ -5,7 +5,7 @@
     {{csrf_field()}}
 
     <div class="header">
-        <h4>Marcas</h4>
+        <h4>Refrigerantes</h4>
         <hr>
     </div>
 
@@ -31,6 +31,43 @@
                             <input type="text" class="form-control" name="nome" value="{{$nome}}">
                         </div>
                     </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="">Marca</label>
+                            <select class="form-control" name="id_marca">
+                                <option value="">Selecione ...</option>
+                                @foreach($marcas as $marca)
+                                <option value="{{$marca->id}}">{{$marca->nome}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="">Tipo</label>
+                            <select class="form-control" name="id_tipo_refrigerante">
+                                <option value="">Selecione ...</option>
+                                @foreach($tipos as $tipo)
+                                <option value="{{$tipo->id}}">{{$tipo->tipo}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="">Litragem</label>
+                            <select class="form-control" name="id_litragem">
+                                <option value="">Selecione ...</option>
+                                @foreach($litragens as $litragem)
+                                <option value="{{$litragem->id}}">{{$litragem->nome}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
                 </div>
 
                 <div class="row">
@@ -47,7 +84,7 @@
 
     <div class="vspace" ></div>
 
-    <div class="card" id="card-marcas">
+    <div class="card" id="card-refri">
         <div class="card-header">
             Marcas
         </div>
@@ -56,11 +93,11 @@
 
             <div class="row">
                 <div class="col-md-4" >
-                    <a href="{{url('/marcas/novo')}}"class="btn btn-primary">Novo</a>
+                    <a href="{{url('/refrigerantes/novo')}}"class="btn btn-primary">Novo</a>
                 </div>
 
                 <div class="col-md-4" >
-                    <button type="button"  id="btn-excluir-marca" class="btn btn-danger" name="">Excluir</button>
+                    <button type="button"  id="btn-excluir-refri" class="btn btn-danger" name="">Excluir</button>
                 </div>
 
             </div>
@@ -73,10 +110,14 @@
                     <table class="table table-striped" >
                         <thead>
                             <tr>
-                                <th> <input type="checkbox" id="ch-tudo-marca" name="" value=""> </th>
+                                <th> <input type="checkbox" id="ch-tudo-refri" name="" value=""> </th>
                                 <th>#ID</th>
                                 <th>Nome</th>
-                                <th>Descrição</th>
+                                <th>Marca</th>
+                                <th>Tipo</th>
+                                <th>Litragem</th>
+                                <th>Qtd</th>
+                                <th>Valor Unidade</th>
                                 <th>Data Cadastro</th>
                                 <th>Data Atualização</th>
                                 <th></th>
@@ -84,30 +125,35 @@
                         </thead>
 
                         <tbody>
-                            @foreach($marcas as $marca)
+                            @foreach($refrigerantes as $refrigerante)
                                 <tr>
-                                    <td> <input type="checkbox" class="ch-marca" name="" value="{{$marca->id}}"> </td>
-                                    <td>{{$marca->id}}</td>
-                                    <td>{{$marca->nome}}</td>
-                                    <td>{{$marca->descricao}}</td>
+
+                                    <td> <input type="checkbox" class="ch-refri" name="" value="{{$refrigerante->id}}"> </td>
+                                    <td>{{$refrigerante->id}}</td>
+                                    <td>{{$refrigerante->nome}}</td>
+                                    <td>{{$refrigerante->marca()->first()->nome}}</td>
+                                    <td>{{$refrigerante->tipo()->first()->tipo}}</td>
+                                    <td>{{$refrigerante->litragem()->first()->nome}}</td>
+                                    <td>{{$refrigerante->qtd_estoque}}</td>
+                                    <td>R$ {{number_format($refrigerante->valor_unidade,2,',', '.')}}</td>
                                     <td>
-                                        @if (!empty($marca->created_at))
-                                            {{date('d/m/Y', strtotime($marca->created_at))}}
+                                        @if (!empty($refrigerante->created_at))
+                                            {{date('d/m/Y', strtotime($refrigerante->created_at))}}
                                         @endif
                                     </td>
                                     <td>
-                                        @if (!empty($marca->updated_at))
-                                            {{date('d/m/Y', strtotime($marca->updated_at))}}
+                                        @if (!empty($refrigerante->updated_at))
+                                            {{date('d/m/Y', strtotime($refrigerante->updated_at))}}
                                         @endif
                                     </td>
-                                    <td> <a href="{{url('/marcas/' . $marca->id . '/editar/')}}">Editar</a> </td>
+                                    <td> <a href="{{url('/refrigerantes/' . $refrigerante->id . '/editar/')}}">Editar</a> </td>
                                 </tr>
                             @endforeach
                         </tbody>
 
                     </table>
 
-                    {{$marcas->appends($queryPagination)->links()}}
+                    {{$refrigerantes->appends($queryPagination)->links()}}
 
                 </div>
 
@@ -123,28 +169,28 @@
 
 <script>
     $(function(){
-        MarcaController.init();
+        RefriController.init();
     });
 
 
-    var MarcaController = {
+    var RefriController = {
         init: function() {
 
             var self = this;
 
-            $("#ch-tudo-marca").on('click', function(){
+            $("#ch-tudo-refri").on('click', function(){
                 self.selecionarTudo();
             });
 
-            $("#btn-excluir-marca").on('click', function(){
+            $("#btn-excluir-refri").on('click', function(){
                 self.excluirSelecionados();
             });
 
         },
 
         selecionarTudo: function() {
-            var selecionado = $("#ch-tudo-marca").prop('checked');
-            $(".ch-marca").prop('checked', selecionado);
+            var selecionado = $("#ch-tudo-refri").prop('checked');
+            $(".ch-refri").prop('checked', selecionado);
         },
 
         excluirSelecionados: function() {
@@ -168,7 +214,7 @@
             .then( function (willDelete) {
               if (willDelete) {
 
-                  $('#card-marcas').loading({
+                  $('#card-refri').loading({
                       theme: 'dark',
                       message: 'Realizando exclusão, aguarde ...'
                   });
@@ -182,7 +228,7 @@
 
         auxPsegarSelecionados: function() {
             var ids = [];
-            var selecionados = $(".ch-marca:checked");
+            var selecionados = $(".ch-refri:checked");
 
             selecionados.each(function(index,item){
                 ids.push($(item).val());
@@ -194,7 +240,7 @@
         auxAjaxExcluirMarcas: function (selecionados) {
 
             var ajaxExclusao = $.ajax({
-                url: "{{url('/marcas/ajax/excluir')}}",
+                url: "{{url('/refrigerantes/ajax/excluir')}}",
                 type: 'post',
                 dataType: 'json',
                 data: {
@@ -204,7 +250,7 @@
             });
 
             ajaxExclusao.done(function(resultado){
-                $('#card-marcas').loading('stop');
+                $('#card-refri').loading('stop');
 
                 if (resultado.status) {
                     swal('', "Exclusão realizada com sucesso!", 'success').then(function () {
@@ -219,7 +265,7 @@
             });
 
             ajaxExclusao.fail(function(){
-                $('#card-marcas').loading('stop');
+                $('#card-refri').loading('stop');
                 swal("Erro", "Erro ao realizar exclusão!", "error");
 
             });

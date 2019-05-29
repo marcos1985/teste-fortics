@@ -27,7 +27,7 @@
         <form class="" action="{{url('/marcas/atualizar')}}" method="post">
             {{ csrf_field() }}
 
-            <input type="hidden" name="id_marca" value="{{$marca->id}}">
+            <input type="hidden" name="id" value="{{$marca->id}}">
 
             <div class="row">
 

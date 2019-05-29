@@ -2,7 +2,7 @@
 
 @section('conteudo')
 <div class="header">
-    <h4>Adicionar marca</h4>
+    <h4>Adicionar litragem</h4>
     <hr>
 </div>
 
@@ -20,11 +20,11 @@
 
 <div class="card">
     <div class="card-header">
-        Marca
+        Litragem
     </div>
 
     <div class="card-body">
-        <form class="" action="{{url('/marcas/adicionar')}}" method="post">
+        <form class="" action="{{url('/litragens/adicionar')}}" method="post">
             {{ csrf_field() }}
 
             <div class="row">
