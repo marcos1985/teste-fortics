@@ -21,7 +21,6 @@ class RefrigerantesController extends Controller
 
         $dados = $request->all();
 
-        $marcas  = Marca::all();
         $tipos   = TipoRefrigerante::all();
         $litragens = Litragem::all();
 
@@ -46,7 +45,6 @@ class RefrigerantesController extends Controller
         #dd($refrigerantes);
 
         $viewData['refrigerantes'] = $refrigerantes;
-        $viewData['marcas'] = $marcas;
         $viewData['tipos']  = $tipos;
         $viewData['litragens'] = $litragens;
 
@@ -57,11 +55,9 @@ class RefrigerantesController extends Controller
 
     public function create(Request $request) {
 
-        $marcas  = Marca::all();
         $tipos   = TipoRefrigerante::all();
         $litragens = Litragem::all();
-
-        $viewData['marcas'] = $marcas;
+        
         $viewData['tipos']  = $tipos;
         $viewData['litragens'] = $litragens;
 
@@ -77,7 +73,7 @@ class RefrigerantesController extends Controller
         $refrigerante = new Refrigerante();
 
         $refrigerante->nome = $dados['nome'];
-        $refrigerante->id_marca = $dados['id_marca'];
+        $refrigerante->sabor = $dados['sabor'];
         $refrigerante->id_tipo_refrigerante = $dados['id_tipo_refrigerante'];
         $refrigerante->id_litragem = $dados['id_litragem'];
         $refrigerante->qtd_estoque = is_numeric($dados['qtd_estoque']) ? $dados['qtd_estoque'] : 0;

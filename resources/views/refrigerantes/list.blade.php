@@ -34,13 +34,9 @@
 
                     <div class="col-md-2">
                         <div class="form-group">
-                            <label for="">Marca</label>
-                            <select class="form-control" name="id_marca">
-                                <option value="">Selecione ...</option>
-                                @foreach($marcas as $marca)
-                                <option value="{{$marca->id}}">{{$marca->nome}}</option>
-                                @endforeach
-                            </select>
+                            <label for="">Sabor</label>
+                            <input type="text" class="form-control" name="sabor" value="">
+
                         </div>
                     </div>
 
@@ -113,7 +109,7 @@
                                 <th> <input type="checkbox" id="ch-tudo-refri" name="" value=""> </th>
                                 <th>#ID</th>
                                 <th>Nome</th>
-                                <th>Marca</th>
+                                <th>Sabor</th>
                                 <th>Tipo</th>
                                 <th>Litragem</th>
                                 <th>Qtd</th>
@@ -131,7 +127,7 @@
                                     <td> <input type="checkbox" class="ch-refri" name="" value="{{$refrigerante->id}}"> </td>
                                     <td>{{$refrigerante->id}}</td>
                                     <td>{{$refrigerante->nome}}</td>
-                                    <td>{{$refrigerante->marca()->first()->nome}}</td>
+                                    <td>{{$refrigerante->sabor}}</td>
                                     <td>{{$refrigerante->tipo()->first()->tipo}}</td>
                                     <td>{{$refrigerante->litragem()->first()->nome}}</td>
                                     <td>{{$refrigerante->qtd_estoque}}</td>

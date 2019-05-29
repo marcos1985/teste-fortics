@@ -15,11 +15,9 @@ class CriarTabelaRefrigerente extends Migration
     {
         Schema::create('tb_refrigerante', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nome', 30)->unique();
-
-            $table->bigInteger('id_marca')->unsigned();
-            $table->foreign('id_marca')->references('id')->on('tb_marca_refrigerante');
-
+            $table->string('nome', 30);
+            $table->string('sabor', 30);
+            
             $table->bigInteger('id_tipo_refrigerante')->unsigned();
             $table->foreign('id_tipo_refrigerante')->references('id')->on('tb_tipo_refrigerante');
 

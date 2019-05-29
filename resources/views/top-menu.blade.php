@@ -4,10 +4,7 @@
     <li class="nav-item">
       <a class="nav-link" href="{{url('/refrigerantes')}}">Refrigerantes</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="{{url('/marcas')}}">Marcas</a>
-    </li>
-
+    
     <li class="nav-item">
       <a class="nav-link" href="{{url('tipos-refrigerantes')}}">Tipo Refrigerante</a>
     </li>

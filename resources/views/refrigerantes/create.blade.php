@@ -37,13 +37,8 @@
 
                 <div class="col-md-2">
                     <div class="form-group">
-                        <label for="">* Marca</label>
-                        <select class="form-control" value="{{old('id_marca')}}" name="id_marca">
-                            <option value="">Selecione ...</option>
-                            @foreach($marcas as $marca)
-                            <option value="{{$marca->id}}">{{$marca->nome}}</option>
-                            @endforeach
-                        </select>
+                        <label for="">* Sabor</label>
+                        <input type="text" class="form-control" name="sabor" value="{{old('sabor')}}">
                     </div>
                 </div>
 
