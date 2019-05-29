@@ -20,7 +20,7 @@
             <strong>Composer:</strong>
                 composer install
         </p>
-        
+
         <p>
             <strong> Migrações: </strong>
                 php artisan migrate
@@ -77,7 +77,7 @@
         </p>
 
         <p>
-            Foram usadas as seguintes bibliotecas JavaScrit:
+            Foram usadas as seguintes bibliotecas JavaScript:
             <ul>
                 <li>Jquery (<a href="https://jquery.com">https://jquery.com</a>) </li>
                 <li>Bootstrap 4 (<a href="https://getbootstrap.com.br/">https://getbootstrap.com.br/</a>)</li>
