@@ -114,6 +114,11 @@ class RefrigerantesController extends Controller
 
         #dd($dados);
 
+        if (!Refrigerante::verificaUnicidade($dados)) {
+            $errors[] = "Refri já cadastrado!";
+            return redirect()->back()->withErrors($errors)->withInput($dados);
+        }
+
         $refrigerante = new Refrigerante();
 
         $refrigerante->nome = $dados['nome'];
@@ -150,6 +155,11 @@ class RefrigerantesController extends Controller
         $dados = $request->all();
 
         #dd($dados);
+
+        if (!Refrigerante::verificaUnicidade($dados)) {
+            $errors[] = "Refri já cadastrado!";
+            return redirect()->back()->withErrors($errors)->withInput($dados);
+        }
 
         $refrigerante = Refrigerante::find($dados['id']);
 
