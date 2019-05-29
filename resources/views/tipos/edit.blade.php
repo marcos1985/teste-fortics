@@ -34,7 +34,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for=""><strong>* Tipo<strong></label>
-                        <input type="text" class="form-control" name="tipo" value="{{$tipo->tipo}}" >
+                        <input type="text" class="form-control" name="tipo" value="{{ old('tipo', $tipo->tipo)}}" >
                     </div>
                 </div>
 
@@ -44,7 +44,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="">Descrição</label>
-                        <textarea name="descricao"  class="form-control" rows="8">{{$tipo->descricao}}</textarea>
+                        <textarea name="descricao"  class="form-control" rows="8">{{ old('descricao', $tipo->descricao) }}</textarea>
                     </div>
 
                 </div>
